@@ -5,8 +5,9 @@
 
 [node name="SwordAbilityController" type="Node"]
 script = ExtResource("1_5fauf")
+MAX_RANGE = 150.0
 sword_ability = ExtResource("2_0uw66")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 1.501
+wait_time = 0.366
 autostart = true

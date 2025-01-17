@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://duucx47q4yhuq"]
+[gd_scene load_steps=6 format=3 uid="uid://duucx47q4yhuq"]
 
 [ext_resource type="Texture2D" uid="uid://c05m3bti54qsd" path="res://scenes/ability/sword_ability/sword.png" id="1_uuqc4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2r5q"]
+size = Vector2(30, 30)
 
 [sub_resource type="Animation" id="Animation_wk30h"]
 resource_name = "swing"
@@ -44,6 +47,18 @@ tracks/2/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_ahk84"]
 length = 0.001
@@ -71,6 +86,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xr7i0"]
 _data = {
@@ -80,12 +107,21 @@ _data = {
 
 [node name="sword_ability" type="Node2D"]
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(15, 0)
+shape = SubResource("RectangleShape2D_e2r5q")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_uuqc4")
+offset = Vector2(0, -4)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_xr7i0")
 }
 autoplay = "swing"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_uuqc4")
-offset = Vector2(0, -4)
